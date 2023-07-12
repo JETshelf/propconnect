@@ -10,8 +10,8 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-12">
-                    <h2>Add Agent
-                        <small>Add New Agent</small>
+                    <h2>Edit Agent
+                        <small>Edit Agent</small>
                     </h2>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12 text-md-right">
@@ -21,7 +21,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i>
                                 Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('admin.agents') }}">Agents</a></li>
-                        <li class="breadcrumb-item active">Add New Agent</li>
+                        <li class="breadcrumb-item active">Edit Agent</li>
                     </ul>
                 </div>
             </div>
@@ -39,15 +39,17 @@
 
                         </div>
                         <div class="body">
-                            <form method="POST" action="{{ route('add.agent') }}">
+                            <form method="POST" action="{{ route('admin.updateAgent', $agent->id) }}">
                                 @csrf
+
+                                @method('PATCH')
 
                                 <div class="row clearfix">
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text"
                                                 class="form-control @error('full_name') is-invalid @enderror"
-                                                id="full_name" name="full_name" value="{{ old('full_name') }}"
+                                                id="full_name" name="full_name" value="{{ $agent->full_name }}"
                                                 placeholder="Enter Full Name" />
                                             @error('full_name')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -58,7 +60,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number"
-                                                name="phone_number" value="{{ old('phone_number') }}" placeholder="Enter Phone Number" />
+                                                name="phone_number" value="{{ $agent->phone_number }}" placeholder="Enter Phone Number" />
                                             @error('phone_number')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -68,7 +70,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
-                                                value="{{ old('email') }}" placeholder="Enter Email" />
+                                                value="{{  $agent->email }}" placeholder="Enter Email" />
                                             @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -78,7 +80,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address"
-                                                value="{{ old('address') }}" placeholder="Enter Address" />
+                                                value="{{  $agent->address }}" placeholder="Enter Address" />
                                             @error('address')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -88,7 +90,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control @error('identification') is-invalid @enderror" id="identification"
-                                                name="identification" value="{{ old('identification') }}" placeholder="Enter Identification"  />
+                                                name="identification" value="{{  $agent->identification }}" placeholder="Enter Identification"  />
                                             @error('identification')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -98,7 +100,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control @error('zip_code') is-invalid @enderror"
-                                                id="zip_code" name="zip_code" value="{{ old('zip_code') }}"
+                                                id="zip_code" name="zip_code" value="{{  $agent->zip_code }}"
                                                 placeholder="Enter Agency Phone Number"  />
                                             @error('zip_code')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -111,7 +113,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control @error('agency_name') is-invalid @enderror" id="agency_name"
-                                                name="agency_name" value="{{ old('agency_name') }}" placeholder="Enter Agency Name"  />
+                                                name="agency_name" value="{{ $agent->agency_name }}" placeholder="Enter Agency Name"  />
                                             @error('agency_name')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -121,7 +123,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control @error('agency_phone_number') is-invalid @enderror"
-                                                id="agency_phone_number" name="agency_phone_number" value="{{ old('agency_phone_number') }}"
+                                                id="agency_phone_number" name="agency_phone_number" value="{{  $agent->agency_phone_number }}"
                                                 placeholder="Enter Agency Phone Number"  />
                                             @error('agency_phone_number')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -132,7 +134,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="email" class="form-control @error('agency_email') is-invalid @enderror" id="agency_email"
-                                                name="agency_email" value="{{ old('agency_email') }}" placeholder="Enter Agency Email"  />
+                                                name="agency_email" value="{{ $agent->agency_email }}" placeholder="Enter Agency Email"  />
                                             @error('agency_email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -142,7 +144,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control @error('agency_address') is-invalid @enderror" id="agency_address"
-                                                name="agency_address" value="{{ old('agency_address') }}" placeholder="Enter Agency Address"  />
+                                                name="agency_address" value="{{  $agent->agency_address }}" placeholder="Enter Agency Address"  />
                                             @error('agency_address')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -152,7 +154,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control @error('agency_license') is-invalid @enderror" id="agency_license"
-                                                name="agency_license" value="{{ old('agency_license') }}" placeholder="Enter Agency License"  />
+                                                name="agency_license" value="{{  $agent->agency_license }}" placeholder="Enter Agency License"  />
                                             @error('agency_license')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -162,7 +164,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="number" class="form-control @error('years_of_experience') is-invalid @enderror"
-                                                id="years_of_experience" name="years_of_experience" value="{{ old('years_of_experience') }}"
+                                                id="years_of_experience" name="years_of_experience" value="{{  $agent->years_of_experience }}"
                                                 placeholder="Enter Years of Experience"  />
                                             @error('years_of_experience')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -178,7 +180,7 @@
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <input class="form-check-input @error('background_check') is-invalid @enderror" type="checkbox"
-                                                    id="background_check" name="background_check" value="1" {{ old('background_check') ? 'checked' : '' }}>
+                                                    id="background_check" name="background_check" value="1" {{  $agent->background_check ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="background_check">
                                                     Background Check
                                                 </label>
@@ -194,7 +196,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input @error('compliance_documentation') is-invalid @enderror" type="checkbox"
                                                     id="compliance_documentation" name="compliance_documentation" value="1"
-                                                    {{ old('compliance_documentation') ? 'checked' : '' }}>
+                                                    {{  $agent->compliance_documentation ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="compliance_documentation">
                                                     Compliance Documentation
                                                 </label>
@@ -209,7 +211,7 @@
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <input class="form-check-input @error('terms_accepted') is-invalid @enderror" type="checkbox"
-                                                    id="terms_accepted" name="terms_accepted" value="1" {{ old('terms_accepted') ? 'checked' : '' }}>
+                                                    id="terms_accepted" name="terms_accepted" value="1" {{  $agent->terms_accepted ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="terms_accepted">
                                                     Terms Accepted
                                                 </label>
@@ -228,7 +230,7 @@
 
                                 <div class="row clearfix">
                                     <div class="col-sm-12 mt-4">
-                                        <button type="submit" class="btn btn-primary btn-round">Submit</button>
+                                        <button type="submit" class="btn btn-primary btn-round">Update Info</button>
                                     </div>
                                 </div>
                             </form>

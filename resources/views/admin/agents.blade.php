@@ -1,8 +1,7 @@
 @extends('layouts.portal.index')
 
 @section('css_scripts')
-
-<link rel="stylesheet" href="{{ asset('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('content')
@@ -17,9 +16,12 @@
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
 
-                    <button class="btn btn-white btn-icon btn-round hidden-sm-down float-right ml-3" type="button">
-                        <i class="zmdi zmdi-plus"></i>
-                    </button>
+                    <a href="{{ route('admin.addAgent') }}" class="float-right ml-3">
+                        <button class="btn btn-white btn-icon btn-round hidden-sm-down">
+                            <i class="zmdi zmdi-plus"></i>
+                        </button>
+                    </a>
+
 
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i>
@@ -54,36 +56,64 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Name</th>
+                                            <th>Full Name</th>
+                                            <th>Phone Number</th>
                                             <th>Email</th>
-                                            <th>Mobile</th>
-                                            <th>City</th>
-                                            <th>Rating</th>
-                                            <th>Deal</th>
-                                            <th>Value</th>
+                                            <th>Address</th>
+                                            <th>Identification</th>
+                                            <th>Zip Code</th>
+                                            <th>Agency Name</th>
+                                            <th>Agency Phone Number</th>
+                                            <th>Agency Email</th>
+                                            <th>Agency Address</th>
+                                            <th>Agency License</th>
+                                            <th>Years of Experience</th>
+                                            <th>Background Check</th>
+                                            <th>Compliance Documentation</th>
+                                            <th>Terms Accepted</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($agents as $agent)
+                                            <tr>
+                                                <td>
+                                                    <!-- Edit button -->
+                                                    <a href="{{ route('admin.editAgent', $agent->id) }}" class="btn btn-primary btn-sm">
+                                                        Edit
+                                                    </a>
 
-                                        <tr>
-                                            <td>1</td>
-                                            <td><img src="../assets/images/xs/avatar1.jpg" class="w30 rounded mr-2"
-                                                    alt=""> Karen Eilla Boyette</td>
-                                            <td>areneboyette@armyspy.com</td>
-                                            <td>+502-324-4194</td>
-                                            <td>Manchester</td>
-                                            <td class="text-warning">
-                                                <i class="zmdi zmdi-star"></i>
-                                                <i class="zmdi zmdi-star"></i>
-                                                <i class="zmdi zmdi-star"></i>
-                                                <i class="zmdi zmdi-star"></i>
-                                                <i class="zmdi zmdi-star"></i>
-                                            </td>
-                                            <td>53</td>
-                                            <td>$2,800</td>
-                                        </tr>
+                                                    <!-- Delete button -->
+                                                    <form action="{{ route('admin.deleteAgent', $agent->id) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this agent?')">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
 
+                                                <td>
+
+                                                    {{ $agent->full_name }}
+                                                </td>
+                                                <td>{{ $agent->phone_number }}</td>
+                                                <td>{{ $agent->email }}</td>
+                                                <td>{{ $agent->address }}</td>
+                                                <td>{{ $agent->identification }}</td>
+                                                <td>{{ $agent->zip_code }}</td>
+                                                <td>{{ $agent->agency_name }}</td>
+                                                <td>{{ $agent->agency_phone_number }}</td>
+                                                <td>{{ $agent->agency_email }}</td>
+                                                <td>{{ $agent->agency_address }}</td>
+                                                <td>{{ $agent->agency_license }}</td>
+                                                <td>{{ $agent->years_of_experience }} Years</td>
+                                                <td>{{ $agent->background_check ? 'Yes' : 'No' }}</td>
+                                                <td>{{ $agent->compliance_documentation ? 'Yes' : 'No' }}</td>
+                                                <td>{{ $agent->terms_accepted ? 'Yes' : 'No' }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -98,8 +128,6 @@
 
 
 @section('js_scripts')
-
-<script src="{{ asset('assets/bundles/datatablescripts.bundle.js')}}"></script>
-<script src="{{ asset('assets/js/pages/tables/jquery-datatable.js')}}"></script>
-
+    <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
 @endsection

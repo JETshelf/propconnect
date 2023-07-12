@@ -33,4 +33,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/agents', [AgentController::class, 'index'])->name('admin.agents');
     Route::get('/agents/add', [AgentController::class, 'create'])->name('admin.addAgent');
     Route::post('/agents/add/agent', [AgentController::class, 'store'])->name('add.agent');
+    Route::get('/agents/edit/{agent}', [AgentController::class, 'edit'])->name('admin.editAgent');
+    Route::patch('/agents/update/{agent}', [AgentController::class, 'update'])->name('admin.updateAgent');
+    Route::delete('/agents/{agent}', [AgentController::class, 'delete'])->name('admin.deleteAgent');
 });
