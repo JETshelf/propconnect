@@ -234,8 +234,8 @@ class Login extends Controller
         $request->session()->regenerateToken();
 
         return redirect()
-            ->route('account.login')
-            ->with(['success' =>  'You have successfully logged out'])
+            ->route('auth.login')
+            ->with(['success' =>  'Logged out'])
             ->header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0')
             ->header('Pragma', 'no-cache')
             ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');

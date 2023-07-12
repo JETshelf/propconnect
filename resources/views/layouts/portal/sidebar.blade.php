@@ -21,6 +21,9 @@
 
                     <li><a href="{{ route('admin.dashboard')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
 
+
+                    <li><a href="{{ route('admin.agents')}}"><i class="zmdi zmdi-home"></i><span>Agents</span></a></li>
+
                 </ul>
             </div>
         </div>

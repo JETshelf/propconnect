@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboard;
+use App\Http\Controllers\Admin\AgentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,11 @@ Route::post('/forgot_password/send_password_reset_link', [Login::class, 'sendRes
 Route::get('/reset_password/{token}', [Login::class, 'resetPassword'])->name('password.reset');
 Route::post('/reset_password/password/update', [Login::class, 'updatePassword'])->name('password.change');
 
-Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');
+//  Admin Dashboard Routes
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');
+
+    Route::get('/agents', [AgentController::class, 'index'])->name('admin.agents');
+    Route::get('/agents/add', [AgentController::class, 'create'])->name('admin.addAgent');
+    Route::post('/agents/add/agent', [AgentController::class, 'store'])->name('add.agent');
+});

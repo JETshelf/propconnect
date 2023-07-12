@@ -1,7 +1,6 @@
 @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show">
-        <i class="fa fa-bell"></i> {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
+        <i class="zmdi zmdi-bell"></i> {{ session('success') }}
     </div>
 @endif
 
