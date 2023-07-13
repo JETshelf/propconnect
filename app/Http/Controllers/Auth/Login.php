@@ -84,6 +84,10 @@ class Login extends Controller
             return redirect()
                 ->route('admin.dashboard')
                 ->with(['success' => 'You have successfully logged in as an Administrator.']);
+        }elseif (auth()->user()->hasRole('Agent')) {
+            return redirect()
+                ->route('agent.dashboard')
+                ->with(['success' => 'You have successfully logged in as an Agent.']);
         }
 
 

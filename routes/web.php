@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboard;
+use App\Http\Controllers\Agent\AgentDashboard;
 use App\Http\Controllers\Admin\AgentController;
 
 /*
@@ -36,4 +37,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/agents/edit/{agent}', [AgentController::class, 'edit'])->name('admin.editAgent');
     Route::patch('/agents/update/{agent}', [AgentController::class, 'update'])->name('admin.updateAgent');
     Route::delete('/agents/{agent}', [AgentController::class, 'delete'])->name('admin.deleteAgent');
+});
+
+//  Agent Dashboard Routes
+Route::middleware(['auth'])->prefix('agent')->group(function () {
+    Route::get('/dashboard', [AgentDashboard::class, 'index'])->name('agent.dashboard');
+
 });
