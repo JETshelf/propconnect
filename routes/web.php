@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboard;
 use App\Http\Controllers\Agent\AgentDashboard;
 use App\Http\Controllers\Admin\AgentController;
+use App\Http\Controllers\Agent\AgentProperties;
+use App\Http\Controllers\Home\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,10 @@ use App\Http\Controllers\Admin\AgentController;
 */
 
 // ? Authentication Routes
-Route::get('/', [Login::class, 'index'])->name('auth.login');
+Route::get('/', [HomeController::class, 'index'])->name('home.page');
+Route::get('/properties/view/{property}', [HomeController::class, 'view'])->name('home.viewProperty');
+
+
 Route::get('/login', [Login::class, 'index'])->name('auth.login');
 Route::post('/user/login', [Login::class, 'login2'])->name('login.user');
 Route::get('/logout', [Login::class, 'logout'])->name('auth.logout');
@@ -42,5 +47,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 //  Agent Dashboard Routes
 Route::middleware(['auth'])->prefix('agent')->group(function () {
     Route::get('/dashboard', [AgentDashboard::class, 'index'])->name('agent.dashboard');
+
+    Route::get('/properties', [AgentProperties::class, 'index'])->name('agent.properties');
+    Route::get('/properties/add', [AgentProperties::class, 'create'])->name('agent.addProperty');
+    Route::post('/properties/add/property', [AgentProperties::class, 'store'])->name('add.property');
+    Route::get('/properties/edit/{property}', [AgentProperties::class, 'edit'])->name('agent.editProperty');
+    Route::get('/properties/view/{property}', [AgentProperties::class, 'view'])->name('agent.viewProperty');
+    Route::patch('/properties/update/{property}', [AgentProperties::class, 'update'])->name('agent.updateProperty');
+    Route::delete('/properties/{property}', [AgentProperties::class, 'delete'])->name('agent.deleteProperty');
+
 
 });

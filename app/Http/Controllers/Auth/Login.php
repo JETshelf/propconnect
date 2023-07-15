@@ -75,7 +75,7 @@ class Login extends Controller
             'email' => $user->email,
             'username' => $user->username,
             'mobile' => $user->mobile,
-            'name' => $user->first_name . ' ' . $user->last_name,
+            'name' => $user->name,
             'role' => $user->getRoleNames()->first(), // Get the first role name associated with the user
             'lastActivity' => time(),
         ]);
