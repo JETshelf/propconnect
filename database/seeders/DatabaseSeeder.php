@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AgentsSeeder::class);
         $this->call(PropertySeeder::class);
         $this->call(PropertyImageSeeder::class);
+        $this->call(AgentPhotoSeeder::class);
     }
 }

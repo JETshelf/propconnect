@@ -22,6 +22,10 @@ use App\Http\Controllers\Home\HomeController;
 // ? Authentication Routes
 Route::get('/', [HomeController::class, 'index'])->name('home.page');
 Route::get('/properties/view/{property}', [HomeController::class, 'view'])->name('home.viewProperty');
+Route::get('/agent', [HomeController::class, 'addAgent'])->name('home.addAgent');
+Route::post('/agent/add', [HomeController::class, 'registerAgent'])->name('home.registerAgent');
+Route::post('/property/inquiry', [HomeController::class, 'storeInquiry'])->name('home.addInquiry');
+
 
 
 Route::get('/login', [Login::class, 'index'])->name('auth.login');

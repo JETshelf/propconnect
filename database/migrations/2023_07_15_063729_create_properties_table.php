@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('agent_id');
+            $table->foreign('agent_id')->references('id')->on('agents');
             $table->string('property_name');
             $table->string('property_location');
             $table->text('property_description');
@@ -43,6 +45,7 @@ return new class extends Migration
             $table->boolean('coffee_pot')->default(false);
             $table->timestamps();
         });
+
     }
 
     /**

@@ -9,7 +9,7 @@
             /* Adjust the width as needed */
             height: 450px;
             /* Adjust the height as needed */
-            object-fit:fill;
+            object-fit: fill;
             /* Maintain aspect ratio and fill the container */
         }
     </style>
@@ -56,8 +56,8 @@
                                 <div class="carousel-inner">
                                     @foreach ($property->propertyImages as $key => $image)
                                         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                            <img src="{{ asset('storage/' . $image->image_path) }}" class="img-fluid carousel-image "
-                                                alt="">
+                                            <img src="{{ asset('storage/' . $image->image_path) }}"
+                                                class="img-fluid carousel-image " alt="">
                                             <div class="carousel-caption">
                                                 <h3>{{ $image->caption }}</h3>
                                                 <p>{{ $image->description }}</p>
@@ -183,7 +183,10 @@
                         <div class="body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127641.20752770935!2d36.80261635608148!3d-1.3023039235767253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11655c311541%3A0x9dd769ac1c10b897!2sNairobi%20County!5e0!3m2!1sen!2ske!4v1689410564405!5m2!1sen!2ske" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127641.20752770935!2d36.80261635608148!3d-1.3023039235767253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11655c311541%3A0x9dd769ac1c10b897!2sNairobi%20County!5e0!3m2!1sen!2ske!4v1689410564405!5m2!1sen!2ske"
+                                        width="100%" height="450" style="border:0;" allowfullscreen=""
+                                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
 
@@ -194,8 +197,8 @@
                 <div class="col-lg-4 col-md-12">
                     <div class="card">
                         <div class="body text-center">
-                            <a href="#"><img src="{{ asset('assets/images/sm/avatar1.jpg')}}" class="rounded-circle"
-                                    alt="profile-image"></a>
+                            <a href="#"><img src="{{ asset('assets/images/sm/avatar1.jpg') }}"
+                                    class="rounded-circle" alt="profile-image"></a>
                             <h4 class="m-t-10">Eliana Smith</h4>
                             <div class="col-12">
 
@@ -210,27 +213,45 @@
 
                         </div>
                         <div class="body">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Mobile No.">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <textarea rows="4" class="form-control no-resize"
-                                    placeholder="Please type what you want..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-round">Submit</button>
-                            <button type="submit" class="btn btn-default btn-round btn-simple">Cancel</button>
+                            <div id="responseMessage" class="mb-3"></div>
+
+                            <form id="inquiryForm" method="POST" action="{{ route('home.addInquiry') }}">
+                                @csrf
+                                <div class="body">
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" name="property_id"
+                                            placeholder="Property ID" value="{{ $property->id }}">
+                                        <input type="text" class="form-control" name="property_name"
+                                            placeholder="Property ID" value="{{ $property->property_name }}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="name" placeholder="Name"
+                                            value="{{ old('name') }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="mobile_no"
+                                            placeholder="Mobile No." value="{{ old('mobile_no') }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="email" placeholder="Email"
+                                            value="{{ old('email') }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea rows="4" class="form-control no-resize" name="message" required
+                                            placeholder="Please type what you want...">{{ old('message') }}</textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-round">Submit</button>
+                                    <button type="button" class="btn btn-default btn-round btn-simple">Cancel</button>
+                                </div>
+                            </form>
+
+
                         </div>
                     </div>
                     <div class="card">
                         <div class="header">
                             <h2><strong>Property Extra Details</strong></h2>
-                            
+
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -238,31 +259,31 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Price:</th>
-                                            <td>$390,000</td>
+                                            <td>KSH {{ $property->price_rent }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Contract type: </th>
-                                            <td><span class="badge badge-primary">For Sale</span></td>
+                                            <td><span class="badge badge-primary">{{ $property->property_type }}</span></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Bathrooms:</th>
-                                            <td>1.5</td>
+                                            <td>{{ $property->bedrooms }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Square ft:</th>
-                                            <td>468</td>
+                                            <td>{{ $property->square_ft }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Garage Spaces:</th>
-                                            <td>2</td>
+                                            <td>{{ $property->car_parking }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Land Size:</th>
-                                            <td>721 m²</td>
+                                            <td>{{ $property->bedrooms }} FT</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Floors:</th>
-                                            <td>2</td>
+                                            <td>{{ $property->bedrooms }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Listed for:</th>
@@ -278,7 +299,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">Bedrooms:</th>
-                                            <td>3</td>
+                                            <td>{{ $property->bedrooms }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -301,4 +322,46 @@
 @section('js_scripts')
     <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Handle form submission using Ajax
+            $('#inquiryForm').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        // Handle success response
+                        console.log(response);
+                        showResponseMessage('success', 'Your inquiry request has been submitted successfully.');
+                        // Reset the form fields
+                        $('#inquiryForm')[0].reset();
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        console.log(xhr.responseText);
+                        showResponseMessage('error', 'Error occurred while submitting the form.');
+                    }
+                });
+            });
+
+            // Function to show the response message
+            function showResponseMessage(type, message) {
+                var responseElement = $('#responseMessage');
+                responseElement.removeClass('alert alert-success alert-danger');
+                responseElement.empty();
+
+                if (type === 'success') {
+                    responseElement.addClass('alert alert-success');
+                } else if (type === 'error') {
+                    responseElement.addClass('alert alert-danger');
+                }
+
+                responseElement.text(message);
+            }
+        });
+    </script>
 @endsection

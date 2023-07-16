@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agent;
 use App\Models\Property;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -55,6 +56,8 @@ class PropertySeeder extends Seeder
             '32109 Uhuru Highway',
         ];
 
+        $agentIds = Agent::pluck('id')->toArray(); // Get an array of agent IDs
+
         for ($i = 0; $i < 25; $i++) {
             $property = [
                 'property_name' => $faker->randomElement($nairobiPropertyNames) . ', Nairobi',
@@ -94,6 +97,8 @@ class PropertySeeder extends Seeder
                 $property['bedrooms'],
                 $property['bedrooms']
             );
+
+            $property['agent_id'] = $faker->randomElement($agentIds); // Assign a random agent ID
 
             Property::create($property);
         }
