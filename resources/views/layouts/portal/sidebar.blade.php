@@ -36,6 +36,8 @@
 
                     <li><a href="{{ route('agent.properties')}}"><i class="zmdi zmdi-home"></i><span>Properties</span></a></li>
 
+                    <li><a href="{{ route('agent.inquiries')}}"><i class="zmdi zmdi-home"></i><span>Inquiries</span></a></li>
+
                     @endif
 
                 </ul>

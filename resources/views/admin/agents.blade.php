@@ -56,6 +56,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>#</th>
                                             <th>Full Name</th>
                                             <th>Phone Number</th>
                                             <th>Email</th>
@@ -91,6 +92,8 @@
                                                         </button>
                                                     </form>
                                                 </td>
+
+                                                <td><img src="{{ asset('storage/' .$agent->photo->image_path) }}" class="rounded-circle" alt="profile-image"></td>
 
                                                 <td>
 

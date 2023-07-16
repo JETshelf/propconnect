@@ -13,7 +13,9 @@ class AgentProperties extends Controller
     {
         $page_title = 'Properties';
 
-        $properties = Property::all();
+        $agentId = session('agent_id');
+        
+        $properties = Property::where('agent_id', $agentId)->get();
 
         return view('agent.properties', [
             'page_title' => $page_title,

@@ -26,4 +26,14 @@ class Agent extends Model
         'compliance_documentation',
         'terms_accepted',
     ];
+
+    public function photo()
+    {
+        return $this->hasOne(AgentPhoto::class);
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
 }

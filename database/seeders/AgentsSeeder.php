@@ -54,6 +54,7 @@ class AgentsSeeder extends Seeder
             $user = new User;
             $user->name = $agentData['full_name'];
             $user->username = $agentData['email'];
+            $user->agent_id = $agent->id;
             $user->email = $agentData['email'];
             $user->mobile = $agentData['phone_number'];
             $user->password = $encryptedPassword;

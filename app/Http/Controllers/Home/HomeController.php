@@ -16,17 +16,40 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $page_title = 'Home';
 
-        $properties = Property::all();
+        $query = Property::query();
+
+        // Check if a search term is provided
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+
+            $query->where(function ($innerQuery) use ($searchTerm) {
+                $innerQuery->where('property_name', 'LIKE', "%$searchTerm%")
+                    ->orWhere('property_location', 'LIKE', "%$searchTerm%")
+                    ->orWhere('property_description', 'LIKE', "%$searchTerm%")
+                    ->orWhere('property_type', 'LIKE', "%$searchTerm%")
+                    ->orWhere('price_rent', 'LIKE', "%$searchTerm%")
+                    // Add more search conditions for other attributes as needed
+                    ->orWhere('bedrooms', 'LIKE', "%$searchTerm%");
+            });
+        }
+
+        // Retrieve all properties if no search term is provided
+        if (!$request->has('search')) {
+            $properties = Property::all();
+        } else {
+            $properties = $query->get();
+        }
 
         return view('home.index', [
             'page_title' => $page_title,
             'properties' => $properties,
         ]);
     }
+
 
     public function view($id)
     {
@@ -81,14 +104,14 @@ class HomeController extends Controller
         if ($agent->save()) {
 
             if ($request->hasFile('agent_image')) {
-                foreach ($request->file('agent_image') as $image) {
-                    $imagePath = $image->store('agent_image', 'public');
-                    $agentImage = new AgentPhoto();
-                    $agentImage->agent_id = $agent->id;
-                    $agentImage->image_path = $imagePath;
-                    $agentImage->save();
-                }
+                $image = $request->file('agent_image');
+                $imagePath = $image->store('agent_image', 'public');
+                $agentImage = new AgentPhoto();
+                $agentImage->agent_id = $agent->id;
+                $agentImage->image_path = $imagePath;
+                $agentImage->save();
             }
+
 
             // Assign the default password
             $password = "12345678.";

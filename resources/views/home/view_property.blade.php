@@ -197,16 +197,14 @@
                 <div class="col-lg-4 col-md-12">
                     <div class="card">
                         <div class="body text-center">
-                            <a href="#"><img src="{{ asset('assets/images/sm/avatar1.jpg') }}"
-                                    class="rounded-circle" alt="profile-image"></a>
-                            <h4 class="m-t-10">Eliana Smith</h4>
+                            <a href="#"><img src="{{ asset('storage/' .$property->agent->photo->image_path) }}" class="rounded-circle" alt="profile-image"></a>
+                            <h4 class="m-t-10">{{ $property->agent->full_name }}</h4>
                             <div class="col-12">
-
-                                <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                <p class="text-muted">{{ $property->agent->address }}</p>
                             </div>
-
                         </div>
                     </div>
+
                     <div class="card">
                         <div class="header">
                             <h2><strong>Request</strong> Inquiry</h2>

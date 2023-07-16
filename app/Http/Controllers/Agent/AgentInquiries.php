@@ -2,31 +2,26 @@
 
 namespace App\Http\Controllers\Agent;
 
-use App\Models\Agent;
 use App\Models\Inquiry;
-use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AgentDashboard extends Controller
+class AgentInquiries extends Controller
 {
     public function index()
     {
-        $page_title = 'Dashboard';
+        $page_title = 'Inquiries';
 
         $agentId = session('agent_id');
 
-        $properties = Property::where('agent_id', $agentId)->count();
-
-
         $inquiries = Inquiry::whereHas('property', function ($query) use ($agentId) {
             $query->where('agent_id', $agentId);
-        })->count();
+        })->get();
 
-        return view('agent.dashboard', [
+        return view('agent.inquiries', [
             'page_title' => $page_title,
-            'properties' => $properties,
             'inquiries' => $inquiries,
         ]);
     }
+
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminInquiries;
 use App\Http\Controllers\Agent\AgentDashboard;
 use App\Http\Controllers\Admin\AdminProperties;
 use App\Http\Controllers\Admin\AgentController;
+use App\Http\Controllers\Agent\AgentInquiries;
 use App\Http\Controllers\Agent\AgentProperties;
 
 /*
@@ -75,6 +76,8 @@ Route::middleware(['auth'])->prefix('agent')->group(function () {
     Route::get('/properties/view/{property}', [AgentProperties::class, 'view'])->name('agent.viewProperty');
     Route::patch('/properties/update/{property}', [AgentProperties::class, 'update'])->name('agent.updateProperty');
     Route::delete('/properties/{property}', [AgentProperties::class, 'delete'])->name('agent.deleteProperty');
+
+    Route::get('/inquiries', [AgentInquiries::class, 'index'])->name('agent.inquiries');
 
 
 });

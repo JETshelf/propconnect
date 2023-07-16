@@ -43,7 +43,7 @@ class Login extends Controller
             return redirect()
                 ->back()
                 ->withInput($request->only('username', 'remember'))
-                ->with(['error' => 'Invalid credentials! Please try again']);
+                ->with(['error' => 'Invalid credentials!']);
         }
 
         if ($user->status === 'inactive') {
@@ -75,6 +75,7 @@ class Login extends Controller
             'email' => $user->email,
             'username' => $user->username,
             'mobile' => $user->mobile,
+            'agent_id' => $user->agent_id,
             'name' => $user->name,
             'role' => $user->getRoleNames()->first(), // Get the first role name associated with the user
             'lastActivity' => time(),
