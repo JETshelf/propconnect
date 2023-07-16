@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Auth\Login;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Admin\AdminDashboard;
+use App\Http\Controllers\Admin\AdminInquiries;
 use App\Http\Controllers\Agent\AgentDashboard;
+use App\Http\Controllers\Admin\AdminProperties;
 use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Agent\AgentProperties;
-use App\Http\Controllers\Home\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,20 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/agents/edit/{agent}', [AgentController::class, 'edit'])->name('admin.editAgent');
     Route::patch('/agents/update/{agent}', [AgentController::class, 'update'])->name('admin.updateAgent');
     Route::delete('/agents/{agent}', [AgentController::class, 'delete'])->name('admin.deleteAgent');
+
+    Route::get('/properties', [AdminProperties::class, 'index'])->name('admin.properties');
+    Route::get('/properties/add', [AdminProperties::class, 'create'])->name('admin.addProperty');
+    Route::post('/properties/add/property', [AdminProperties::class, 'store'])->name('add.property');
+    Route::get('/properties/edit/{property}', [AdminProperties::class, 'edit'])->name('admin.editProperty');
+    Route::get('/properties/view/{property}', [AdminProperties::class, 'view'])->name('admin.viewProperty');
+    Route::patch('/properties/update/{property}', [AdminProperties::class, 'update'])->name('admin.updateProperty');
+    Route::delete('/properties/{property}', [AdminProperties::class, 'delete'])->name('admin.deleteProperty');
+
+    Route::get('/inquiries', [AdminInquiries::class, 'index'])->name('admin.inquiries');
+    Route::get('/inquiries/edit/{inquiry}', [AdminInquiries::class, 'edit'])->name('admin.editInquiry');
+    Route::get('/inquiries/view/{inquiry}', [AdminInquiries::class, 'view'])->name('admin.viewInquiry');
+    Route::patch('/inquiries/update/{inquiry}', [AdminInquiries::class, 'update'])->name('admin.updateInquiry');
+    Route::delete('/inquiries/{inquiry}', [AdminInquiries::class, 'delete'])->name('admin.deleteInquiry');
 });
 
 //  Agent Dashboard Routes

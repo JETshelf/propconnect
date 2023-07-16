@@ -48,7 +48,7 @@ $(function() {
         spotRadius: 1
     });
 
-    // 
+    //
     $('.knob').knob({
         draw: function() {
         }
@@ -64,23 +64,20 @@ $(function() {
                         // each columns data
                         ['data1', 40],
                         ['data2', 10],
-                        ['data3', 35],
-                        ['data4', 15],
+                        
                     ],
                     type: 'donut', // default type of chart
                     labels: false,
                     colors: {
                         'data1': '#e96875',
                         'data2': '#ff9e47',
-                        'data3': '#62bad9',
-                        'data4': '#7e6990'
+
                     },
                     names: {
                         // name of each serie
-                        'data1': 'Commercial',
-                        'data2': 'Residential',
-                        'data3': 'Purchased',
-                        'data4': 'Rented',
+                        'data1': 'For Sale',
+                        'data2': 'For Rent',
+
                     }
                 },
                 axis: {

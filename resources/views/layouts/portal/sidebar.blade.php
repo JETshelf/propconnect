@@ -26,6 +26,10 @@
 
                     <li><a href="{{ route('admin.agents')}}"><i class="zmdi zmdi-home"></i><span>Agents</span></a></li>
 
+                    <li><a href="{{ route('admin.properties')}}"><i class="zmdi zmdi-home"></i><span>Properties</span></a></li>
+
+                    <li><a href="{{ route('admin.inquiries')}}"><i class="zmdi zmdi-home"></i><span>Inquiries</span></a></li>
+
                     @elseif (auth()->user()->hasRole('Agent'))
 
                     <li><a href="{{ route('agent.dashboard')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
