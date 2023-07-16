@@ -14,7 +14,7 @@ class AgentProperties extends Controller
         $page_title = 'Properties';
 
         $agentId = session('agent_id');
-        
+
         $properties = Property::where('agent_id', $agentId)->get();
 
         return view('agent.properties', [
@@ -27,8 +27,11 @@ class AgentProperties extends Controller
     {
         $page_title = 'Add New Property';
 
+        $agentId = session('agent_id');
+
         return view('agent.add_property', [
             'page_title' => $page_title,
+            'agentId' => $agentId,
         ]);
     }
 
@@ -36,6 +39,7 @@ class AgentProperties extends Controller
     {
         // Validate the user's inputs
         $validatedData = $request->validate([
+            'agent_id' => 'required|string',
             'property_name' => 'required|string',
             'property_location' => 'required|string',
             'property_description' => 'required|string',

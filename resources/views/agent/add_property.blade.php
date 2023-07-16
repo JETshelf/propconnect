@@ -44,6 +44,8 @@
 
                                 <div class="body">
                                     <div class="row clearfix">
+                                        <input type="hidden" class="form-control @error('agent_id') is-invalid @enderror"
+                                                    name="agent_id" placeholder="Agent ID" value="{{ $agentId }}">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control @error('property_name') is-invalid @enderror"

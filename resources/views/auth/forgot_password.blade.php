@@ -9,7 +9,11 @@
     <div class="container">
         <div class="col-md-12 content-center">
             <div class="card-plain">
-                <form class="form" method="" action="#">
+                <form action="{{ route('auth.sendResetPasswordLink') }}" method="POST" class="form">
+
+                    @csrf
+                    @include('layouts.portal.alerts_block')
+                    
                     <div class="header">
                         <div class="logo-container">
                             <img src="{{ asset('assets/images/logo.svg') }}" alt="">
@@ -17,16 +21,20 @@
                         <h5>Forgot Password?</h5>
                         <span>Enter your e-mail address below to reset your password.</span>
                     </div>
-                    <div class="content">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Email">
-                            <span class="input-group-addon">
-                                <i class="zmdi zmdi-email"></i>
-                            </span>
-                        </div>
+                    <div class="input-group">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" id="email" value="{{ old('email') }}" placeholder="Enter email" />
+
+                        <span class="input-group-addon">
+                            <i class="zmdi zmdi-account-circle"></i>
+                        </span>
+                        @error('email')
+                            <div class="invalid-feedback text-bold" style="color: #fff;">{{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="footer text-center">
-                        <a href="index.html" class="btn btn-primary btn-round btn-lg btn-block waves-effect waves-light">SUBMIT</a>
+                        <button type="submit" class="btn btn-primary btn-round btn-lg btn-block ">SUBMIT</button>
                         <h5><a href="{{ route('auth.login')}}" class="link">Remember Password? Sign In</a></h5>
                     </div>
                 </form>

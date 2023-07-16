@@ -6,13 +6,14 @@ use App\Models\User;
 use App\Models\Agent;
 use App\Models\Inquiry;
 use App\Models\Property;
+use App\Models\AgentPhoto;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\PasswordReset;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use App\Models\AgentPhoto;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -123,6 +124,7 @@ class HomeController extends Controller
             $user = new User;
             $user->name = $request->input('full_name');
             $user->username = $request->input('email');
+            $user->agent_id = $agent->id;
             $user->email = $request->input('email');
             $user->mobile = $request->input('phone_number');
             $user->password = $encryptedPassword;
@@ -156,27 +158,25 @@ class HomeController extends Controller
             // Save the new user
             $user->save();
 
-            return redirect()
+
+
+            // Send password reset link email with the token
+            if (Mail::send('emails.agent-registration', ['token' => $token, 'user' => $user], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject("Account Creation Notification");
+            })) {
+
+
+
+                return redirect()
                 ->route('home.addAgent')
                 ->with(['success' => 'Hello, ' . $user->name . ' . Thanks for wanting to partner with us as an agent. An email with the password reset link was sent to ' . $user->email]);
+            } else {
 
-            // // Send password reset link email with the token
-            // if (Mail::send('emails.verify-email', ['token' => $token, 'user' => $user], function ($message) use ($request) {
-            //     $message->to($request->email);
-            //     $message->subject("Account Creation Notification");
-            // })) {
-
-
-
-            //     return redirect()
-            //         ->route('admin.agents')
-            //         ->with(['success' => $user->first_name . ' ' . $user->last_name . ' has been registered successfully. An email with the password reset link was sent to ' . $user->email]);
-            // } else {
-
-            //     return redirect()
-            //         ->back()
-            //         ->with(['error' => 'There was an error sending the email. Please try again. ']);
-            // }
+                return redirect()
+                    ->back()
+                    ->with(['error' => 'There was an error sending the email. Please try again. ']);
+            }
 
         }
     }

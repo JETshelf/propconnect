@@ -220,9 +220,9 @@ class Login extends Controller
             }
 
             // Return a success message
-            $success_msg = 'Password for account user ' . $user->first_name . ' ' . $user->last_name . ' has been reset successfully. You can now sign in to access your account.';
+            $success_msg = 'Password for account user ' . $user->name . ' has been reset successfully. You can now sign in to access your account.';
 
-            return redirect()->route('account.login')->with('success', $success_msg);
+            return redirect()->route('auth.login')->with('success', $success_msg);
         }
     }
 
