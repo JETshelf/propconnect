@@ -39,7 +39,7 @@ class AgentProperties extends Controller
     {
         // Validate the user's inputs
         $validatedData = $request->validate([
-            'agent_id' => 'required|string',
+            'agent_id' => 'required',
             'property_name' => 'required|string',
             'property_location' => 'required|string',
             'property_description' => 'required|string',
@@ -47,7 +47,7 @@ class AgentProperties extends Controller
             'price_rent' => 'required|numeric',
             'bedrooms' => 'required|integer',
             'square_ft' => 'required|integer',
-            'car_parking' => 'required|integer',
+            'car_parking' => 'required|integer', 
             'year_built' => 'required|integer',
             'property_address' => 'required|string',
             'dining_room' => 'nullable|integer',

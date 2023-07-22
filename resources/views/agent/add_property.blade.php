@@ -10,8 +10,8 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-12">
-                    <h2>Add Agent
-                        <small>Add New Agent</small>
+                    <h2>Add Property
+                        <small>Add New Property</small>
                     </h2>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12 text-md-right">
@@ -20,8 +20,8 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i>
                                 Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.agents') }}">Agents</a></li>
-                        <li class="breadcrumb-item active">Add New Agent</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.properties') }}">Properties</a></li>
+                        <li class="breadcrumb-item active">Add New Property</li>
                     </ul>
                 </div>
             </div>

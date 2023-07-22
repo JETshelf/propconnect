@@ -222,6 +222,26 @@
                                         </div>
                                     </div>
 
+                                    <div class="user-detail">
+                                        <span class="detail-label">Account Status:</span>
+                                        <?php if ($student->status == 'approved') : ?>
+                                        <span
+                                            class="text-success px-2 pt-5px rounded fs-12px d-inline-flex align-items-center"><i
+                                                class="fa fa-circle fs-9px fa-fw me-5px"></i> Approved</span>
+                                        <?php endif ?>
+                                        <?php if ($student->status == 'pending') : ?>
+                                        <span
+                                            class="text-primary px-2 pt-5px rounded fs-12px d-inline-flex align-items-center"><i
+                                                class="fa fa-circle fs-9px fa-fw me-5px"></i> Pending</span>
+                                        <?php endif ?>
+                                        <?php if ($student->status == 'declined') : ?>
+                                        <span
+                                            class="text-danger px-2 pt-5px rounded fs-12px d-inline-flex align-items-center"><i
+                                                class="fa fa-circle fs-9px fa-fw me-5px"></i> Declined</span>
+                                        <?php endif ?>
+
+                                    </div>
+
 
 
 
